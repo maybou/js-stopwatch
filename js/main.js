@@ -9,7 +9,7 @@
     var date_obj = new Date();
 
     var milliseconds = date_obj.getTime();
-
+    timer.textContent = milliseconds;
     // console.log(milliseconds);
     setTimeout(function(){
         show();
