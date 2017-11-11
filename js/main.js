@@ -11,6 +11,10 @@
   let is_running = false;
   let split_num = 1;
 
+  var min
+  var sec;
+  var msec;
+
 
   start.addEventListener('click',function(){
       if(is_running === true){
@@ -59,27 +63,38 @@
   }
 
   function updateTimerText(){
-    var min = Math.floor(elapsed_time / 60000);
-    var sec = Math.floor(elapsed_time % 60000 / 1000);
-    var msec = elapsed_time % 1000;
-    min = ('0' + min).slice(-2);
-    sec = ('0' + sec).slice(-2);
-    msec = ('00' + msec).slice(-3);
-    timer.textContent =  min + ":" + sec + ":" + msec;
+
+    // min = Math.floor(elapsed_time / 60000);
+    // sec = Math.floor(elapsed_time % 60000 / 1000);
+    // msec = elapsed_time % 1000;
+    // min = ('0' + min).slice(-2);
+    // sec = ('0' + sec).slice(-2);
+    // msec = ('00' + msec).slice(-3);
+    timer.textContent =  convertTimerText(elapsed_time);
   }
 
   function createSplitTimeText(){
-    var min = Math.floor(elapsed_time / 60000);
-    var sec = Math.floor(elapsed_time % 60000 / 1000);
-    var msec = elapsed_time % 1000;
-    min = ('0' + min).slice(-2);
-    sec = ('0' + sec).slice(-2);
-    msec = ('00' + msec).slice(-3);
+    // min = Math.floor(elapsed_time / 60000);
+    // sec = Math.floor(elapsed_time % 60000 / 1000);
+    // msec = elapsed_time % 1000;
+    // min = ('0' + min).slice(-2);
+    // sec = ('0' + sec).slice(-2);
+    // msec = ('00' + msec).slice(-3);
 
-    let split_time = `${min}:${sec}:${msec}`;
+    let split_time = convertTimerText(elapsed_time);
 
     $('ul').prepend('<li class="collection-item">' + split_num + '  ' + split_time + '</li>');
     split_num++;
   }
+
+ function convertTimerText(){
+     min = Math.floor(elapsed_time / 60000);
+     sec = Math.floor(elapsed_time % 60000 / 1000);
+     msec = elapsed_time % 1000;
+     min = ('0' + min).slice(-2);
+     sec = ('0' + sec).slice(-2);
+     msec = ('00' + msec).slice(-3);
+     return `${min}:${sec}:${msec}`;
+ }
 
 })();
