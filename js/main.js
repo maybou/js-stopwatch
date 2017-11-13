@@ -10,8 +10,6 @@
     let added_time = 0;
     let is_running = false;
     let split_num = 1;
-    let lap_time;
-    let lap_num = 1;
 
     let min
     let sec;
@@ -20,16 +18,13 @@
 
     start.addEventListener('click', function () {
         if (is_running === true) {
-
-            createLapTimeText();
             return;
         }
-        this.innerHTML = "lap";
+        start.classList.add('disable');
         reset.innerHTML = "split";
 
         is_running = true;
         start_time = Date.now();
-        lap_time = Date.now();
 
         show();
     });
@@ -38,7 +33,7 @@
         if (is_running === false) {
             return;
         }
-        start.innerHTML = "start";
+        start.classList.remove('disable');
         reset.innerHTML = "reset";
         is_running = false;
         clearTimeout(timer_id);
@@ -52,7 +47,6 @@
         }
         $('ul').empty();
         split_num = 1;
-        lap_num = 1;
         elapsed_time = 0;
         added_time = 0;
         timer.textContent = convertTimerText(elapsed_time);
@@ -74,15 +68,6 @@
         split_num++;
     }
 
-    function createLapTimeText() {
-        console.log(convertTimerText(Date.now() - lap_time));
-        let lap_time_text = convertTimerText(Date.now() - lap_time);
-
-        $('ul').prepend('<li class="collection-item">' + lap_num + '  ' + lap_time_text + '</li>');
-        lap_num++;
-        lap_time = Date.now();
-        console.log(convertTimerText(Date.now() - lap_time));
-    }
 
     function convertTimerText() {
         min = Math.floor(elapsed_time / 60000);
