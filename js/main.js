@@ -20,7 +20,7 @@
         if (is_running === true) {
             return;
         }
-        start.classList.add('disable');
+        start.classList.add('disabled');
         reset.innerHTML = "split";
 
         is_running = true;
@@ -33,7 +33,7 @@
         if (is_running === false) {
             return;
         }
-        start.classList.remove('disable');
+        start.classList.remove('disabled');
         reset.innerHTML = "reset";
         is_running = false;
         clearTimeout(timer_id);
