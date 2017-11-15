@@ -4,6 +4,7 @@
     const start = document.getElementById('start');
     const stop = document.getElementById('stop');
     const reset = document.getElementById('reset');
+    const time_list = document.getElementById('time-list');
     let start_time;
     let timer_id;
     let elapsed_time;
@@ -11,10 +12,11 @@
     let is_running = false;
     let split_num = 1;
 
-    let min
+    let min;
     let sec;
     let msec;
 
+    time_list.style.display="none";
 
     start.addEventListener('click', function () {
         if (is_running === true) {
@@ -46,6 +48,7 @@
             return;
         }
         $('ul').empty();
+        time_list.style.display="none";
         split_num = 1;
         elapsed_time = 0;
         added_time = 0;
@@ -53,7 +56,7 @@
     })
 
     function show() {
-        var current_time = Date.now();
+        let current_time = Date.now();
         elapsed_time = current_time - start_time + added_time;
         timer.textContent = convertTimerText(elapsed_time);
         timer_id = setTimeout(function () {
@@ -62,9 +65,11 @@
     }
 
     function createSplitTimeText() {
+        if(split_num == 1){
+            time_list.style.display="block";
+        }
         let split_time = convertTimerText(elapsed_time);
-
-        $('ul').prepend('<li class="collection-item">' + split_num + '  ' + split_time + '</li>');
+        $('ul').prepend('<li class="collection-item row"><span class="col s2 center-align">' + split_num + '</span><span class="col s10 center-align">' + split_time + '</span></li>');
         split_num++;
     }
 

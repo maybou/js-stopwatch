@@ -1,16 +1,30 @@
+body {
+    background-color: #494F56;
+    font-family: 'courier New', sans-serif;
+}
+
 .panel {
-  margin: 20px;
+    margin: 20px;
+    background-color: #E8E5B4;
 }
 
 .btn{
-  margin: 15px 0px;
+    margin: 15px 0px;
+    background-color: #BD4243;
+    color: #E8E5B4;
+}
+
+.btn:hover{
+    background-color: #BD4243;
+    color: #E8E5B4;
 }
 
 .time-text {
     font-size: 40px;
+    color: #494F56;
 }
 
-.collection-item {
-
-    font-size: 30px;
+.collection-item{
+    font-size: 25px;
 }
+
