@@ -12,7 +12,7 @@
     let is_running = false;
     let split_num = 1;
 
-    let min
+    let min;
     let sec;
     let msec;
 
@@ -56,7 +56,7 @@
     })
 
     function show() {
-        var current_time = Date.now();
+        let current_time = Date.now();
         elapsed_time = current_time - start_time + added_time;
         timer.textContent = convertTimerText(elapsed_time);
         timer_id = setTimeout(function () {
