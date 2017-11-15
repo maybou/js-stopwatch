@@ -69,7 +69,7 @@
             time_list.style.display="block";
         }
         let split_time = convertTimerText(elapsed_time);
-        $('ul').prepend('<li class="collection-item">' + split_num + '' + split_time + '</li>');
+        $('ul').prepend('<li class="collection-item row"><span class="col s2 center-align">' + split_num + '</span><span class="col s10 center-align">' + split_time + '</span></li>');
         split_num++;
     }
 
