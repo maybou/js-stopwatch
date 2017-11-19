@@ -28,7 +28,6 @@
         } else {
             lapTime = Date.now();
         }
-        // start.classList.add('disabled');
         reset.innerHTML = "split";
         start.innerHTML = "lap";
         isRunning = true;
@@ -44,7 +43,7 @@
         if (lapNum !== 1) {
             lapAddedTime = Date.now() - lapTime;
         }
-        // start.classList.remove('disabled');
+
         reset.innerHTML = "reset";
         start.innerHTML = "start";
         isRunning = false;
