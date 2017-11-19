@@ -19,13 +19,13 @@
     let sec;
     let msec;
 
-    time_list.style.display="none";
+    time_list.style.display = "none";
 
     start.addEventListener('click', function () {
         if (isRunning === true) {
             createLapTimeText();
             return;
-        }else{
+        } else {
             lapTime = Date.now();
         }
         // start.classList.add('disabled');
@@ -41,7 +41,7 @@
         if (isRunning === false) {
             return;
         }
-        if ( lapNum !== 1) {
+        if (lapNum !== 1) {
             lapAddedTime = Date.now() - lapTime;
         }
         // start.classList.remove('disabled');
@@ -58,7 +58,7 @@
             return;
         }
         $('ul').empty();
-        time_list.style.display="none";
+        time_list.style.display = "none";
         splitNum = 1;
         elapsedTime = 0;
         addedTime = 0;
@@ -75,8 +75,8 @@
     }
 
     function createSplitTimeText() {
-        if(splitNum == 1){
-            time_list.style.display="block";
+        if (splitNum == 1) {
+            time_list.style.display = "block";
         }
         let splitTimeText = convertTimerText(elapsedTime);
         $('ul').prepend('<li class="collection-item row"><span class="col s2 center-align">' + splitNum + '</span><span class="col s10 center-align">' + splitTimeText + '</span></li>');
@@ -84,8 +84,8 @@
     }
 
     function createLapTimeText() {
-        if(lapNum == 1){
-            time_list.style.display="block";
+        if (lapNum == 1) {
+            time_list.style.display = "block";
         }
         lapTime -= Date.now();
         let lapTimeText = convertTimerText(Math.abs(lapTime));
