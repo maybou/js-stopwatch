@@ -5,85 +5,103 @@
     const stop = document.getElementById('stop');
     const reset = document.getElementById('reset');
     const time_list = document.getElementById('time-list');
-    let start_time;
-    let timer_id;
-    let elapsed_time;
-    let added_time = 0;
-    let is_running = false;
-    let split_num = 1;
+    let startTime;
+    let timerId;
+    let elapsedTime;
+    let addedTime = 0;
+    let isRunning = false;
+    let splitNum = 1;
+    let lapNum = 1;
+    let lapTime;
+    let lapAddedTime;
 
     let min;
     let sec;
     let msec;
 
-    time_list.style.display="none";
+    time_list.style.display = "none";
 
     start.addEventListener('click', function () {
-        if (is_running === true) {
+        if (isRunning === true) {
+            createLapTimeText();
             return;
+        } else {
+            lapTime = Date.now();
         }
-        start.classList.add('disabled');
+        // start.classList.add('disabled');
         reset.innerHTML = "split";
-
-        is_running = true;
-        start_time = Date.now();
+        start.innerHTML = "lap";
+        isRunning = true;
+        startTime = Date.now();
 
         show();
     });
 
     stop.addEventListener('click', function () {
-        if (is_running === false) {
+        if (isRunning === false) {
             return;
         }
-        start.classList.remove('disabled');
+        if (lapNum !== 1) {
+            lapAddedTime = Date.now() - lapTime;
+        }
+        // start.classList.remove('disabled');
         reset.innerHTML = "reset";
-        is_running = false;
-        clearTimeout(timer_id);
-        added_time += Date.now() - start_time;
+        start.innerHTML = "start";
+        isRunning = false;
+        clearTimeout(timerId);
+        addedTime += Date.now() - startTime;
     })
 
     reset.addEventListener('click', function () {
-        if (is_running === true) {
+        if (isRunning === true) {
             createSplitTimeText();
             return;
         }
         $('ul').empty();
-        time_list.style.display="none";
-        split_num = 1;
-        elapsed_time = 0;
-        added_time = 0;
-        timer.textContent = convertTimerText(elapsed_time);
+        time_list.style.display = "none";
+        splitNum = 1;
+        elapsedTime = 0;
+        addedTime = 0;
+        timer.textContent = convertTimerText(elapsedTime);
     })
 
     function show() {
         let current_time = Date.now();
-        elapsed_time = current_time - start_time + added_time;
-        timer.textContent = convertTimerText(elapsed_time);
-        timer_id = setTimeout(function () {
+        elapsedTime = current_time - startTime + addedTime;
+        timer.textContent = convertTimerText(elapsedTime);
+        timerId = setTimeout(function () {
             show();
         }, 10);
     }
 
     function createSplitTimeText() {
-        if(split_num == 1){
-            time_list.style.display="block";
+        if (splitNum == 1) {
+            time_list.style.display = "block";
         }
-        let split_time = convertTimerText(elapsed_time);
-        $('ul').prepend('<li class="collection-item row"><span class="col s2 center-align">' + split_num + '</span><span class="col s10 center-align">' + split_time + '</span></li>');
-        split_num++;
+        let splitTimeText = convertTimerText(elapsedTime);
+        $('ul').prepend('<li class="collection-item row"><span class="col s2 center-align">' + splitNum + '</span><span class="col s10 center-align">' + splitTimeText + '</span></li>');
+        splitNum++;
+    }
+
+    function createLapTimeText() {
+        if (lapNum == 1) {
+            time_list.style.display = "block";
+        }
+        lapTime -= Date.now();
+        let lapTimeText = convertTimerText(Math.abs(lapTime));
+        $('ul').prepend('<li class="collection-item row"><span class="col s2 center-align">' + lapNum + '</span><span class="col s10 center-align">' + lapTimeText + '</span></li>');
+        lapTime = Date.now();
+        lapNum++;
     }
 
 
-    function convertTimerText() {
-        min = Math.floor(elapsed_time / 60000);
-        sec = Math.floor(elapsed_time % 60000 / 1000);
-        msec = elapsed_time % 1000;
+    function convertTimerText(elapsedTime) {
+        min = Math.floor(elapsedTime / 60000);
+        sec = Math.floor(elapsedTime % 60000 / 1000);
+        msec = elapsedTime % 1000;
         min = ('0' + min).slice(-2);
         sec = ('0' + sec).slice(-2);
         msec = ('00' + msec).slice(-3);
         return `${min}:${sec}:${msec}`;
     }
-
-
-
 })();
